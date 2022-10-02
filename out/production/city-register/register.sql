@@ -34,8 +34,8 @@ CREATE TABLE cr_adress(
    FOREIGN KEY (district_code)REFERENCES cr_district(district_code)ON DELETE RESTRICT,
    FOREIGN KEY (street_code)REFERENCES cr_street(street_code) ON DELETE RESTRICT
 );
-INSERT INTO cr_adress(district_code,street_code,building,extenssion,apartment)VALUES(1,1,'10','6','8');
-
+INSERT INTO cr_adress(district_code,street_code,building,extenssion,apartment)VALUES(1,1,'build','exten','apar');
+INSERT INTO cr_adress(district_code,street_code,building,extenssion,apartment)VALUES(1,1,'count1',null,'4');
 CREATE TABLE cr_person(
     person_id SERIAL,
     sur_name varchar(100) not null,
@@ -76,9 +76,11 @@ CREATE TABLE cr_address_person(
     FOREIGN KEY (person_id)REFERENCES cr_person(person_id)ON DELETE RESTRICT
 );
  INSERT INTO cr_address_person(address_id,person_id,start_date,end_date)VALUES(1,1,'2014-12-10',null);
- INSERT INTO cr_address_person(address_id,person_id,start_date,end_date)VALUES(1,2,'2014-12-10',null);
+ INSERT INTO cr_address_person(address_id,person_id,start_date,end_date)VALUES(2,2,'2014-12-10',null);
  INSERT INTO cr_address_person(address_id,person_id,start_date,end_date)VALUES(1,3,'2016-10-05',null);
  INSERT INTO cr_address_person(address_id,person_id,start_date,end_date)VALUES(1,4,'2018-04-10',null);
+
+
 
 
 4. Персона -ФИО,дата рождения,Паспорт (серия/номер/дата выдачи),

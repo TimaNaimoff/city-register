@@ -12,26 +12,45 @@ public class PersonCheckDao {
             " INNER JOIN cr_person pp ON pp.person_id = ap.person_id " +
             " INNER JOIN cr_adress aa ON aa.address_id = ap.address_id " +
             " WHERE " +
-            " UPPER(pp.sur_name)=UPPER(?) AND UPPER(pp.given_name)=UPPER(?) AND UPPER(pp.patronymic)=UPPER(?) " +
-            " AND pp.date_of_bith= ? AND aa.street_code= ? AND UPPER(aa.building)=UPPER(?) AND UPPER(aa.extenssion)= UPPER(?) " +
-            " AND UPPER(aa.apartment)=upper(?)";
-    public PersonResponse checkPerson(PersonRequest personRequest)throws PersonCheckException{
-        PersonResponse response=new PersonResponse();
+            " CURRENT_DATE >= ap.start_date AND (CURRENT_DATE<=ap.end_date OR ap.end_date is null)"+
+            " AND UPPER(pp.sur_name)=UPPER(?) AND UPPER(pp.given_name)=UPPER(?) AND UPPER(pp.patronymic)=UPPER(?) " +
+            " AND pp.date_of_bith= ? AND aa.street_code= ? AND UPPER(aa.building)=UPPER(?)";
+    public PersonResponse checkPerson(PersonRequest personRequest)throws PersonCheckException {
+        PersonResponse response = new PersonResponse();
+
+        String sql = SQL_REQUEST;
+        if (personRequest.getExtension() != null) {
+            sql += " AND UPPER(aa.extenssion)= UPPER(?)";
+        }
+
+        else {
+            sql += " AND aa.extenssion IS null ";
+        }
+        if(personRequest.getApartment()!=null){
+            sql+=" AND UPPER(aa.apartment)=upper(?)";
+        }
+        else {
+            sql+=" AND aa.apartment IS null ";
+        }
         try(Connection con=getConnection();
-            PreparedStatement stat = con.prepareStatement(SQL_REQUEST))
+            PreparedStatement stat = con.prepareStatement(sql))
             {   //con.setAutoCommit(false);
 //                try {
+                    int count=1;
+                    stat.setString(count++, personRequest.getSurName());
+                    stat.setString(count++, personRequest.getGivenName());
+                    stat.setString(count++, personRequest.getPatromymic());
+                    stat.setDate(count++, java.sql.Date.valueOf(personRequest.getDateofBirth()));
 
-                    stat.setString(1, personRequest.getSurName());
-                    stat.setString(2, personRequest.getGivenName());
-                    stat.setString(3, personRequest.getPatromymic());
-                    stat.setDate(4, java.sql.Date.valueOf(personRequest.getDateofBirth()));
-
-                    stat.setInt(5, personRequest.getStreetCode());
+                    stat.setInt(count++, personRequest.getStreetCode());
                     //Çהוסü ןנמבכולû
-                    stat.setString(6, personRequest.getBuilding());
-                    stat.setString(7, personRequest.getExtension());
-                    stat.setString(8, personRequest.getApartment());
+                    stat.setString(count++, personRequest.getBuilding());
+                    if(personRequest.getExtension()!=null) {
+                        stat.setString(count++, personRequest.getExtension());
+                    }
+                    if(personRequest.getApartment()!=null) {
+                        stat.setString(count++, personRequest.getApartment());
+                    }
                     ResultSet rs = stat.executeQuery();
                     if(rs.next()) {
                         response.setRegistered(true);
