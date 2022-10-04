@@ -15,6 +15,15 @@ public class PersonCheckDao {
             " CURRENT_DATE >= ap.start_date AND (CURRENT_DATE<=ap.end_date OR ap.end_date is null)"+
             " AND UPPER(pp.sur_name)=UPPER(?) AND UPPER(pp.given_name)=UPPER(?) AND UPPER(pp.patronymic)=UPPER(?) " +
             " AND pp.date_of_bith= ? AND aa.street_code= ? AND UPPER(aa.building)=UPPER(?)";
+
+    public PersonCheckDao(){
+        try{
+           Class.forName("org.postgresql.Driver");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public PersonResponse checkPerson(PersonRequest personRequest)throws PersonCheckException {
         PersonResponse response = new PersonResponse();
 
