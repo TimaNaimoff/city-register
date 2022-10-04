@@ -1,4 +1,5 @@
+edu\javacourse\city\domain\PersonResponse.class
+edu\javacourse\city\web\CheckPersonServlet.class
 edu\javacourse\city\exception\PersonCheckException.class
 edu\javacourse\city\domain\PersonRequest.class
-edu\javacourse\city\domain\PersonResponse.class
 edu\javacourse\city\dao\PersonCheckDao.class
