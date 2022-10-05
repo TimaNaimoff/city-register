@@ -16,13 +16,16 @@ public class PersonCheckDao {
             " AND UPPER(pp.sur_name)=UPPER(?) AND UPPER(pp.given_name)=UPPER(?) AND UPPER(pp.patronymic)=UPPER(?) " +
             " AND pp.date_of_bith= ? AND aa.street_code= ? AND UPPER(aa.building)=UPPER(?)";
 
-    public PersonCheckDao(){
-        try{
-           Class.forName("org.postgresql.Driver");
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+    private ConnectionBuilder connectionBuilder;
+
+    public void setConnectionBuilder(ConnectionBuilder connectionBuilder){
+        this.connectionBuilder=connectionBuilder;
     }
+
+    private Connection getConnection() throws SQLException {
+        return connectionBuilder.getConnection();
+    }
+
 
     public PersonResponse checkPerson(PersonRequest personRequest)throws PersonCheckException {
         PersonResponse response = new PersonResponse();
@@ -79,11 +82,5 @@ public class PersonCheckDao {
 
         return response;
     }
-    private Connection getConnection() throws SQLException {
-         return DriverManager.getConnection(
-                 "jdbc:postgresql://localhost:5432/city_register",
-                    "postgres",
-                    "TERMIT006WIN"
-                 );
-    }
+
 }

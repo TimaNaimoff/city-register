@@ -1,2 +1,3 @@
 edu\javacourse\net\SimpleSocket.class
 edu\javacourse\city\dao\PersonCheckDaoTest.class
+edu\javacourse\city\dao\DirectConnectionBuilder.class
