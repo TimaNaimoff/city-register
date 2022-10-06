@@ -19,4 +19,12 @@ public class PersonResponse {
     public void setTemporal(boolean temporal) {
         this.temporal = temporal;
     }
+
+    @Override
+    public String toString() {
+        return "PersonResponse{" +
+                "registered=" + registered +
+                ", temporal=" + temporal +
+                '}';
+    }
 }
