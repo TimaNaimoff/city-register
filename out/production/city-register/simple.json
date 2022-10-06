@@ -1,0 +1,8 @@
+{
+  "registered" : true,
+  "temporal" : false,
+  "address": {
+    "streetCode": "12",
+    "building": "124"
+  }
+}

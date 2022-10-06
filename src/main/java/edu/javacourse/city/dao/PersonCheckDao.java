@@ -76,7 +76,7 @@ public class PersonCheckDao {
             }catch(SQLException e){
 
             e.printStackTrace();
-            throw new PersonCheckException(e);
+            throw new PersonCheckException();
         }
 
 
