@@ -15,8 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-@WebServlet(name="CheckPersonServlet",urlPatterns = {"/checkPerson"},loadOnStartup = 1)
+@WebServlet(name="CheckPersonServlet",urlPatterns = {"/checkPerson"})
 public class CheckPersonServlet extends HttpServlet {
     private PersonCheckDao dao;
     private static final Logger logger=LoggerFactory.getLogger(CheckPersonServlet.class);
@@ -32,18 +33,19 @@ public class CheckPersonServlet extends HttpServlet {
         resp.getWriter().println("Get CheckPerson-called");
         req.setCharacterEncoding("UTF-8");
         PersonRequest pr=new PersonRequest();
-        String surName=req.getParameter("surname");
-        pr.setSurName(surName);
-        pr.setGivenName("Balfor");
-        pr.setPatromymic("Firewald");
-        pr.setDateofBirth(LocalDate.of(1995, 3,18));
-        pr.setStreetCode(1);
-        pr.setBuilding("build");
-        pr.setExtension("exten");
-        pr.setApartment("apar");
+
+        pr.setSurName(req.getParameter("surname"));
+        pr.setGivenName(req.getParameter("givenname"));
+        pr.setPatromymic(req.getParameter("patronymic"));
+        pr.setDateofBirth(LocalDate.parse(req.getParameter("dateofBith"),
+                DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        pr.setStreetCode(Integer.parseInt(req.getParameter("streetCode")));
+        pr.setBuilding(req.getParameter("building"));
+        pr.setExtension(req.getParameter("extension"));
+        pr.setApartment(req.getParameter("apartment"));
 
         try {
-            dao=new PersonCheckDao();
+
             PersonResponse respi=dao.checkPerson(pr);
             if(respi.isRegistered()){
                 resp.getWriter().write("Registered");

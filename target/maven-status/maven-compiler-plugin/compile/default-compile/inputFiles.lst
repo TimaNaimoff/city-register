@@ -3,5 +3,6 @@ C:\Users\malik\IdeaProjects\city-register\src\main\java\edu\javacourse\city\dao\
 C:\Users\malik\IdeaProjects\city-register\src\main\java\edu\javacourse\city\exception\PersonCheckException.java
 C:\Users\malik\IdeaProjects\city-register\src\main\java\edu\javacourse\city\dao\PersonCheckDao.java
 C:\Users\malik\IdeaProjects\city-register\src\main\java\edu\javacourse\city\domain\PersonResponse.java
+C:\Users\malik\IdeaProjects\city-register\src\main\java\edu\javacourse\city\web\CheckPersonService.java
 C:\Users\malik\IdeaProjects\city-register\src\main\java\edu\javacourse\city\dao\PoolConnectionBuilder.java
 C:\Users\malik\IdeaProjects\city-register\src\main\java\edu\javacourse\city\web\CheckPersonServlet.java
