@@ -33,6 +33,7 @@
                 <version>3.3.1</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <outputDirectory>C:\Users\malik\OneDrive\Рабочий стол\Backend Complects\apache-tomcat-9.0.67\webapps</outputDirectory>
                 </configuration>
             </plugin>
         </plugins>
