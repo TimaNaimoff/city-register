@@ -76,7 +76,7 @@ CREATE TABLE cr_address_person(
     FOREIGN KEY (person_id)REFERENCES cr_person(person_id)ON DELETE RESTRICT
 );
  INSERT INTO cr_address_person(address_id,person_id,start_date,end_date)VALUES(1,1,'2014-12-10',null);
- INSERT INTO cr_address_person(address_id,person_id,start_date,end_date)VALUES(2,2,'2014-12-10',null);
+ INSERT INTO cr_address_person(address_id,person_id,start_date,end_date)VALUES(1,2,'2014-12-10',null);
  INSERT INTO cr_address_person(address_id,person_id,start_date,end_date)VALUES(1,3,'2016-10-05',null);
  INSERT INTO cr_address_person(address_id,person_id,start_date,end_date)VALUES(1,4,'2018-04-10',null);
 
